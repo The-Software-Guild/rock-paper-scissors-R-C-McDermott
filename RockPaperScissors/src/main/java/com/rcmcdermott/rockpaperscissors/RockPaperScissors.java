@@ -12,8 +12,8 @@ public class RockPaperScissors {
         Random rand = new Random();
         
         // Alter minimum and maximum number of rounds here:
-        int minimumRounds = 1;
-        int maximumRounds = 10;
+        final int MINIMUM_ROUNDS = 1;
+        final int MAXIMUM_ROUNDS = 10;
         
         // Declaring variables
         int numberOfRounds;
@@ -28,8 +28,8 @@ public class RockPaperScissors {
         int drawCounter = 0;
         
         
-        numberOfRounds = getNumberOfRounds(minimumRounds, 
-                                           maximumRounds, 
+        numberOfRounds = getNumberOfRounds(MINIMUM_ROUNDS, 
+                                           MAXIMUM_ROUNDS, 
                                            inputReader);
         
         // Game loop
@@ -107,8 +107,8 @@ public class RockPaperScissors {
                     loseCounter = 0;
                     drawCounter = 0;
                     
-                    numberOfRounds = getNumberOfRounds(minimumRounds, 
-                                                       maximumRounds, 
+                    numberOfRounds = getNumberOfRounds(MINIMUM_ROUNDS, 
+                                                       MAXIMUM_ROUNDS, 
                                                        inputReader);  
                 }
                 else {
