@@ -16,7 +16,6 @@ public class RockPaperScissors {
         int maximumRounds = 10;
         
         // Declaring variables
-        String inputRounds;
         int numberOfRounds;
         String userChoice;
         String computerChoice;
@@ -29,25 +28,28 @@ public class RockPaperScissors {
         int drawCounter = 0;
         
         
-        do {
-            System.out.print("How many rounds would you like to play? ");
-            System.out.print("(" + minimumRounds + "-" + maximumRounds + ")");
-            inputRounds = inputReader.nextLine();
-            numberOfRounds = Integer.parseInt(inputRounds);
-            if (numberOfRounds < minimumRounds || numberOfRounds > maximumRounds) {
-                System.out.println("Your input is out of range!");
-            }
-        } while (numberOfRounds < minimumRounds || numberOfRounds > maximumRounds);
+        
+        numberOfRounds = getNumberOfRounds(minimumRounds, 
+                                           maximumRounds, 
+                                           inputReader);
         
         // Game loop
         while (run) {
-            if (roundCounter != numberOfRounds) {
+            if (roundCounter <= numberOfRounds) {
                 System.out.println("Round: " + roundCounter);
                 
                 System.out.println("Please enter your choice: (r)ock, (p)aper or (s)cissors");
                 userChoice = inputReader.nextLine();
       
                 computerChoice = computerChoice(rand);
+                
+                // Parse choices to display on screen
+                System.out.println();
+                parseChoice("Player", userChoice);
+                parseChoice("Computer", computerChoice);
+                System.out.println();
+                
+                // Game conditions
                 if (userChoice.equals(computerChoice)){
                     System.out.println("It's a draw!");
                     roundCounter++;
@@ -94,15 +96,9 @@ public class RockPaperScissors {
                     loseCounter = 0;
                     drawCounter = 0;
                     
-                    do {
-                        System.out.print("How many rounds would you like to play? ");
-                        System.out.print("(" + minimumRounds + "-" + maximumRounds + ")");
-                        inputRounds = inputReader.nextLine();
-                        numberOfRounds = Integer.parseInt(inputRounds);
-                        if (numberOfRounds < minimumRounds || numberOfRounds > maximumRounds) {
-                            System.out.println("Your input is out of range!");
-                        }
-                    } while (numberOfRounds < minimumRounds || numberOfRounds > maximumRounds);  
+                    numberOfRounds = getNumberOfRounds(minimumRounds, 
+                                           maximumRounds, 
+                                           inputReader);  
                 }
                 else {
                     System.out.println("Thanks for playing!");
@@ -147,4 +143,35 @@ public class RockPaperScissors {
         }
     }
     
+    public static void parseChoice(String player, String input) {
+        String result = "";
+        switch (input) {
+            case "r":
+                result = "Rock";
+                break;
+            case "p":
+                result = "Paper";
+                break;
+            case "s":
+                result = "Scissors";
+                break;
+        }
+        System.out.println(player + " has chosen " + result);
+    }
+    
+    public static int getNumberOfRounds(int minimumRounds, int maximumRounds,
+                                        Scanner inputReader) {
+        int numberOfRounds;
+        do {
+            System.out.print("How many rounds would you like to play? ");
+            System.out.print("(" + minimumRounds + "-" + maximumRounds + ")");
+            String inputRounds = inputReader.nextLine();
+            numberOfRounds = Integer.parseInt(inputRounds);
+            if (numberOfRounds < minimumRounds || numberOfRounds > maximumRounds) {
+                System.out.println("Your input is out of range!");
+            }
+        } while (numberOfRounds < minimumRounds || numberOfRounds > maximumRounds);
+        
+        return numberOfRounds;
+    }
 }
