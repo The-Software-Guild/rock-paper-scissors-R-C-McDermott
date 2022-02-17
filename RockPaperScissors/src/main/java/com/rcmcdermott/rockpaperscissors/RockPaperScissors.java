@@ -37,6 +37,7 @@ public class RockPaperScissors {
             if (roundCounter <= numberOfRounds) {
                 System.out.println("Round: " + roundCounter);
                 
+                // Loop to ensure correct value for choice is input
                 boolean checkInput = true;
                 do {
                     System.out.println("Please enter your choice: (r)ock, (p)aper or (s)cissors");
@@ -119,7 +120,6 @@ public class RockPaperScissors {
         }
     }
     
-    
     // Method to create a random computer choice
     public static String computerChoice(Random rand) {
         int randomChoice = rand.nextInt(3);
@@ -135,6 +135,7 @@ public class RockPaperScissors {
         return result;
     }
     
+    // Method to display game statistics and determine the winner
     public static void printStatsAndWinner(int winCounter, int drawCounter, int loseCounter) {
         System.out.println();
         System.out.println("~~~~~~ Game Statistics ~~~~~~");
@@ -154,6 +155,7 @@ public class RockPaperScissors {
         }
     }
     
+    // Method to convert single character choices to more readable choices
     public static void parseChoice(String player, String input) {
         String result = "";
         switch (input) {
@@ -170,6 +172,7 @@ public class RockPaperScissors {
         System.out.println(player + " has chosen " + result);
     }
     
+    // Method to prompt user input for number of rounds to be played
     public static int getNumberOfRounds(int minimumRounds, int maximumRounds,
                                         Scanner inputReader) {
         int numberOfRounds;
