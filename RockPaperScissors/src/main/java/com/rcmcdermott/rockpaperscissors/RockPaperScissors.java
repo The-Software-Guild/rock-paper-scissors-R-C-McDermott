@@ -28,7 +28,6 @@ public class RockPaperScissors {
         int drawCounter = 0;
         
         
-        
         numberOfRounds = getNumberOfRounds(minimumRounds, 
                                            maximumRounds, 
                                            inputReader);
@@ -38,8 +37,17 @@ public class RockPaperScissors {
             if (roundCounter <= numberOfRounds) {
                 System.out.println("Round: " + roundCounter);
                 
-                System.out.println("Please enter your choice: (r)ock, (p)aper or (s)cissors");
-                userChoice = inputReader.nextLine();
+                boolean checkInput = true;
+                do {
+                    System.out.println("Please enter your choice: (r)ock, (p)aper or (s)cissors");
+                    userChoice = inputReader.nextLine();
+                    if (!(userChoice.equals("s") || userChoice.equals("r") || userChoice.equals("p"))) {
+                        System.out.println("Invalid input, please try again.");
+                    }
+                    else {
+                        checkInput = false;
+                    }
+                } while (checkInput);
       
                 computerChoice = computerChoice(rand);
                 
@@ -56,36 +64,38 @@ public class RockPaperScissors {
                     drawCounter++;
                 }
                 else if (userChoice.equals("r") && computerChoice.equals("p")) {
-                    System.out.println("You lose!");
+                    System.out.println("Computer has won this round!");
                     roundCounter++;
                     loseCounter++;
                 }
                 else if (userChoice.equals("r") && computerChoice.equals("s")) {
-                    System.out.println("You win!");
+                    System.out.println("Player has won this round!");
                     roundCounter++;
                     winCounter++;
                 }
                 else if (userChoice.equals("s") && computerChoice.equals("r")) {
-                    System.out.println("You lose!");
+                    System.out.println("Computer has won this round!");
                     roundCounter++;
                     loseCounter++;
                 }
                 else if (userChoice.equals("s") && computerChoice.equals("p")) {
-                    System.out.println("You win!");
+                    System.out.println("Player has won this round!");
                     roundCounter++;
                     winCounter++;
                 }
                 else if (userChoice.equals("p") && computerChoice.equals("s")) {
-                    System.out.println("You lose!");
+                    System.out.println("Computer has won this round!");
                     roundCounter++;
                     loseCounter++;
                 }
                 else if (userChoice.equals("p") && computerChoice.equals("r")) {
-                    System.out.println("You win!");
+                    System.out.println("Player has won this round!");
                     roundCounter++;
                     winCounter++;
                 }
             }
+            
+            // Executes if roundCounter exceeds numberOfRounds
             else {
                 printStatsAndWinner(winCounter, drawCounter, loseCounter);
                 System.out.println("Do you want to play again? (y/n)");
@@ -97,8 +107,8 @@ public class RockPaperScissors {
                     drawCounter = 0;
                     
                     numberOfRounds = getNumberOfRounds(minimumRounds, 
-                                           maximumRounds, 
-                                           inputReader);  
+                                                       maximumRounds, 
+                                                       inputReader);  
                 }
                 else {
                     System.out.println("Thanks for playing!");
@@ -126,6 +136,7 @@ public class RockPaperScissors {
     }
     
     public static void printStatsAndWinner(int winCounter, int drawCounter, int loseCounter) {
+        System.out.println();
         System.out.println("~~~~~~ Game Statistics ~~~~~~");
         System.out.println("Player win count: " + winCounter);
         System.out.println("Computer win count: " + loseCounter);
